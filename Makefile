@@ -4,6 +4,8 @@ install:
 	npm run dev
 	cp main.js ~/SynologyDrive/AppDataSync/obsidian/.obsidian/plugins/obsidian-yuque-publish
 	cp manifest.json ~/SynologyDrive/AppDataSync/obsidian/.obsidian/plugins/obsidian-yuque-publish
+	cp styles.css ~/SynologyDrive/AppDataSync/obsidian/.obsidian/plugins/obsidian-yuque-publish
+
 
 
 
