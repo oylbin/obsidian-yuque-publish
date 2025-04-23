@@ -1,4 +1,4 @@
-import { App, Plugin, PluginManifest } from 'obsidian';
+import { App, Plugin, PluginManifest, Notice } from 'obsidian';
 
 export default class YuquePublishPlugin extends Plugin {
   constructor(app: App, manifest: PluginManifest) {
@@ -8,7 +8,15 @@ export default class YuquePublishPlugin extends Plugin {
   async onload() {
     console.log('Loading Yuque Publish plugin');
     
-    // Add your plugin initialization code here
+    // Add command to publish to Yuque
+    this.addCommand({
+      id: 'publish-to-yuque',
+      name: 'Publish to Yuque',
+      callback: () => {
+        console.log('Publishing to Yuque');
+        new Notice('hello');
+      }
+    });
   }
 
   onunload() {
