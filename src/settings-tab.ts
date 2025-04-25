@@ -24,14 +24,14 @@ export class YuquePublishSettingTab extends PluginSettingTab {
         const ol = explanationDiv.createEl('ol');
         
         const li1 = ol.createEl('li');
-        li1.createEl('strong', { text: 'Personal account configuration:' });
-        li1.createEl('p', { text: 'URL prefix: https://www.yuque.com/YourUserName/' });
-        li1.createEl('p', { text: 'Access token: https://www.yuque.com/settings/tokens' });
+        li1.createEl('strong', { text: 'If you are using a personal account:' });
+        li1.createEl('p', { text: 'Your URL prefix: https://www.yuque.com/yourUserName/' });
+        li1.createEl('p', { text: 'You can find your access token in: https://www.yuque.com/settings/tokens' });
         
         const li2 = ol.createEl('li');
-        li2.createEl('strong', { text: 'Team account configuration:' });
-        li2.createEl('p', { text: 'URL prefix: https://SpaceName.yuque.com/GroupName/' });
-        li2.createEl('p', { text: 'Access token: https://SpaceName.yuque.com/GroupName/settings/tokens' });
+        li2.createEl('strong', { text: 'If you are using a team account:' });
+        li2.createEl('p', { text: 'Your URL prefix: https://spaceName.yuque.com/groupName/' });
+        li2.createEl('p', { text: 'You can find your access token in: https://spaceName.yuque.com/groupName/settings/tokens' });
 
         // Add new group button
         new Setting(containerEl)
@@ -58,7 +58,7 @@ export class YuquePublishSettingTab extends PluginSettingTab {
             // URL Prefix setting
             new Setting(groupDiv)
                 .setName('URL prefix')
-                .setDesc('The URL prefix of your Yuque group (e.g., https://topjoy.yuque.com/tsd)')
+                .setDesc('The URL prefix of your Yuque group (e.g., https://spaceName.yuque.com/groupName/)')
                 .addText(text => text
                     .setPlaceholder('Enter URL prefix')
                     .setValue(group.urlPrefix)

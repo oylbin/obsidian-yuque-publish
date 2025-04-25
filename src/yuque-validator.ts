@@ -19,7 +19,7 @@ export class YuqueValidator {
         const match = config.urlPrefix.match(urlRegex);
         
         if (!match) {
-            throw new Error('URL format is incorrect. It should be like https://SpaceName.yuque.com/GroupName/');
+            throw new Error('URL format is incorrect. It should be like https://spaceName.yuque.com/groupName/');
         }
 
         const [, spaceName, groupName] = match;
