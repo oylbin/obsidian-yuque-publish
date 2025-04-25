@@ -10,7 +10,7 @@ export default class YuquePublishPlugin extends Plugin {
     }
 
     async onload() {
-        console.log('Loading Yuque Publish plugin');
+        // console.log('Loading Yuque Publish plugin');
         
         // Load settings
         await this.loadSettings();
@@ -165,6 +165,6 @@ export default class YuquePublishPlugin extends Plugin {
     }
 
     onunload() {
-        console.log('Unloading Yuque Publish plugin');
+        // console.log('Unloading Yuque Publish plugin');
     }
 } 
