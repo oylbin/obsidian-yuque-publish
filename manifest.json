@@ -1,7 +1,7 @@
 {
   "id": "yuque-publish",
   "name": "Yuque Publish",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minAppVersion": "0.15.0",
   "description": "Publish your Obsidian notes to Yuque.",
   "author": "oylbin",
