@@ -54,8 +54,23 @@ export default class YuquePublishPlugin extends Plugin {
             throw new Error('yuque-doc-url is required in front matter');
         }
 
+        // https://spaceName.yuque.com/groupName/bookSlug/docSlug
+        // check if the yuque-doc-url is valid
+        const urlRegex = /^https:\/\/([^\/]+)\.yuque\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)$/;
+        const match = yuqueDocUrl.match(urlRegex);
+        if (!match) {
+            throw new Error('Invalid yuque-doc-url format, should be like https://spaceName.yuque.com/groupName/bookSlug/docSlug');
+        }
+        
+
         // Get title from front matter or use filename
-        const title = frontMatter['title'] || file.basename;
+        const title = frontMatter['yuque-doc-title'] || file.basename;
+
+        const publicValue = frontMatter['yuque-doc-public'] || 1;
+        // check if the publicValue is valid, 0,1,2
+        if (publicValue != 0 && publicValue != 1 && publicValue != 2) {
+            throw new Error('Invalid yuque-doc-public value, should be 0, 1, or 2; 0: private, 1: public, 2: public for space members');
+        }
 
         // Parse yuque-doc-url to get domain, group_login, book_slug, and doc_slug
         const urlParts = yuqueDocUrl.split('/');
@@ -107,7 +122,7 @@ export default class YuquePublishPlugin extends Plugin {
         const payload = {
             slug: docSlug,
             title: title,
-            public: 2,
+            public: publicValue,
             format: 'markdown',
             body: contentWithoutFrontMatter
         };
