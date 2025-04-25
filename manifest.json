@@ -1,10 +1,11 @@
 {
-  "id": "obsidian-yuque-publish",
+  "id": "yuque-publish",
   "name": "Yuque Publish",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
   "description": "Publish your Obsidian notes to Yuque",
   "author": "oylbin",
   "authorUrl": "https://github.com/oylbin",
+  "fundingUrl": "https://buymeacoffee.com/oylbin",
   "isDesktopOnly": true
 } 
