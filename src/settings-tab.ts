@@ -1,6 +1,7 @@
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting, Notice } from 'obsidian';
 import YuquePublishPlugin from './main';
 import { YuquePublishSettings } from './settings';
+import { YuqueValidator } from './yuque-validator';
 
 export class YuquePublishSettingTab extends PluginSettingTab {
     plugin: YuquePublishPlugin;
@@ -78,8 +79,26 @@ export class YuquePublishSettingTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                     }));
 
-            // Delete button
+            // Test and Delete buttons
             new Setting(groupDiv)
+                .addButton(button => {
+                    button
+                        .setButtonText('Test')
+                        .onClick(async () => {
+                            try {
+                                await YuqueValidator.validate({
+                                    urlPrefix: group.urlPrefix,
+                                    authToken: group.authToken
+                                });
+                            } catch (error) {
+                                if (error instanceof Error) {
+                                    new Notice(error.message);
+                                } else {
+                                    new Notice('Configuration validation failed: Unknown error');
+                                }
+                            }
+                        });
+                })
                 .addButton(button => {
                     button
                         .setButtonText('Delete')
