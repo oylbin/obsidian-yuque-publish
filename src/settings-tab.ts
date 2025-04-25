@@ -14,15 +14,31 @@ export class YuquePublishSettingTab extends PluginSettingTab {
         const { containerEl } = this;
         containerEl.empty();
 
-        containerEl.createEl('h2', { text: 'Yuque Publish Settings' });
+        new Setting(containerEl)
+            .setHeading()
+            .setName('Yuque group and token explanation');
+
+        // Add explanation section
+        const explanationDiv = containerEl.createDiv('yuque-explanation');
+        const ol = explanationDiv.createEl('ol');
+        
+        const li1 = ol.createEl('li');
+        li1.createEl('strong', { text: 'Personal account configuration:' });
+        li1.createEl('p', { text: 'URL prefix: https://www.yuque.com/YourUserName/' });
+        li1.createEl('p', { text: 'Access token: https://www.yuque.com/settings/tokens' });
+        
+        const li2 = ol.createEl('li');
+        li2.createEl('strong', { text: 'Team account configuration:' });
+        li2.createEl('p', { text: 'URL prefix: https://SpaceName.yuque.com/GroupName/' });
+        li2.createEl('p', { text: 'Access token: https://SpaceName.yuque.com/GroupName/settings/tokens' });
 
         // Add new group button
         new Setting(containerEl)
-            .setName('Add New Group')
+            .setName('Add group')
             .setDesc('Add a new Yuque group configuration')
             .addButton(button => {
                 button
-                    .setButtonText('Add Group')
+                    .setButtonText('Add group')
                     .onClick(async () => {
                         this.plugin.settings.groups.push({
                             urlPrefix: '',
@@ -40,8 +56,8 @@ export class YuquePublishSettingTab extends PluginSettingTab {
 
             // URL Prefix setting
             new Setting(groupDiv)
-                .setName('URL Prefix')
-                .setDesc('The prefix of Yuque group URL (e.g., https://topjoy.yuque.com/tsd)')
+                .setName('URL prefix')
+                .setDesc('The URL prefix of your Yuque group (e.g., https://topjoy.yuque.com/tsd)')
                 .addText(text => text
                     .setPlaceholder('Enter URL prefix')
                     .setValue(group.urlPrefix)
@@ -52,10 +68,10 @@ export class YuquePublishSettingTab extends PluginSettingTab {
 
             // Auth Token setting
             new Setting(groupDiv)
-                .setName('Auth Token')
-                .setDesc('The authentication token for this group')
+                .setName('Access token')
+                .setDesc('The access token for this group')
                 .addText(text => text
-                    .setPlaceholder('Enter auth token')
+                    .setPlaceholder('Enter access token')
                     .setValue(group.authToken)
                     .onChange(async (value) => {
                         this.plugin.settings.groups[index].authToken = value;
