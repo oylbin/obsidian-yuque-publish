@@ -53,7 +53,8 @@ export class YuquePublishSettingTab extends PluginSettingTab {
         // Display existing groups
         this.plugin.settings.groups.forEach((group, index) => {
             const groupDiv = containerEl.createDiv('yuque-group-setting');
-            groupDiv.createEl('h3', { text: `Group ${index + 1}` });
+            // groupDiv.createEl('h3', { text: `Group ${index + 1}` });
+            new Setting(groupDiv).setName(`Group ${index + 1}`).setHeading();
 
             // URL Prefix setting
             new Setting(groupDiv)
