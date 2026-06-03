@@ -116,7 +116,7 @@ export default class YuquePublishPlugin extends Plugin {
         }
         
         // Get content without front matter
-        const contentWithoutFrontMatter = content.split('---')[2] || content;
+        const contentWithoutFrontMatter = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
 
         // Prepare document payload
         const payload = {
