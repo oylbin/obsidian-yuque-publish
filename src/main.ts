@@ -1,6 +1,7 @@
-import { App, Plugin, PluginManifest, Notice, TFile, requestUrl } from 'obsidian';
+import { App, Plugin, PluginManifest, Notice, TFile, getFrontMatterInfo, requestUrl } from 'obsidian';
 import { YuquePublishSettings, DEFAULT_SETTINGS } from './settings';
 import { YuquePublishSettingTab } from './settings-tab';
+import { stripFrontMatter } from './frontmatter';
 
 export default class YuquePublishPlugin extends Plugin {
     settings: YuquePublishSettings;
@@ -41,6 +42,9 @@ export default class YuquePublishPlugin extends Plugin {
     async publishToYuque(file: TFile) {
         // Read file content
         const content = await this.app.vault.read(file);
+
+        // Use Obsidian's parser to identify the exact front matter boundary.
+        const contentWithoutFrontMatter = stripFrontMatter(content, getFrontMatterInfo(content));
         
         // Parse front matter
         const frontMatter = this.app.metadataCache.getFileCache(file)?.frontmatter;
@@ -115,9 +119,6 @@ export default class YuquePublishPlugin extends Plugin {
             }
         }
         
-        // Get content without front matter
-        const contentWithoutFrontMatter = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
-
         // Prepare document payload
         const payload = {
             slug: docSlug,
